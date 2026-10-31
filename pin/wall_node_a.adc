@@ -1,0 +1,66 @@
+# =============================================================================
+# wall_node_a.adc -- node A pin constraints (HX4S20C / EG4S20BG256)
+#
+# Link wiring is 1:1 on J1 (same pin number on both boards):
+#   J1-1  D14  link_d[0]      A -> B
+#   J1-5  H13  link_d[2]      A -> B
+#   J1-6  H14  link_d[1]      A -> B
+#   J1-7  J14  link_d[3]      A -> B
+#   J1-9  K12  link_clk       A -> B  (global clock pin)
+#   J1-2  G11  link_sync      A -> B
+#   J1-4  F13  link_vld       A -> B
+#   J1-13 M14  link_bd[0]     B -> A
+#   J1-15 L10  link_bd[1]     B -> A
+#   J1-17 D16  link_bd[2]     B -> A
+#   J1-19 F14  link_bd[3]     B -> A
+#   J1-21 G16  link_bvld      B -> A
+#   J1-12 / J1-30 GND
+# Pin 11 (5V) and pin 29 (3.3V) MUST be removed from the cable.
+# =============================================================================
+
+set_pin_assignment { clk }         { LOCATION = R7;  IOSTANDARD = LVCMOS33; PULLTYPE = NONE; }
+
+set_pin_assignment { key_n[0] }    { LOCATION = A2;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment { key_n[1] }    { LOCATION = B2;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment { key_n[2] }    { LOCATION = B1;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment { key_n[3] }    { LOCATION = C1;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment { sw_n[0] }    { LOCATION = C8;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment { sw_n[1] }    { LOCATION = C7;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment { sw_n[2] }    { LOCATION = C6;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment { sw_n[3] }    { LOCATION = C5;  IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+
+set_pin_assignment { led[0] }      { LOCATION = A4;  IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; }
+set_pin_assignment { led[1] }      { LOCATION = A3;  IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; }
+set_pin_assignment { led[2] }      { LOCATION = C10; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; }
+set_pin_assignment { led[3] }      { LOCATION = B12; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; }
+
+set_pin_assignment { HDMI_D0_P }   { LOCATION = F5;  IOSTANDARD = LVDS33; }
+set_pin_assignment { HDMI_D1_P }   { LOCATION = E3;  IOSTANDARD = LVDS33; }
+set_pin_assignment { HDMI_D2_P }   { LOCATION = B3;  IOSTANDARD = LVDS33; }
+set_pin_assignment { HDMI_CLK_P }  { LOCATION = K1;  IOSTANDARD = LVDS33; }
+set_pin_assignment { HDMI_DDC_SCL } { LOCATION = P1; IOSTANDARD = LVCMOS33; }
+set_pin_assignment { HDMI_DDC_SDA } { LOCATION = R1; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+
+# ---- A -> B (driven here) ----
+set_pin_assignment { link_clk }    { LOCATION = K12; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment { link_sync }   { LOCATION = G11; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment { link_vld }    { LOCATION = F13; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment { link_d[0] }   { LOCATION = D14; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment { link_d[1] }   { LOCATION = H14; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment { link_d[2] }   { LOCATION = H13; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment { link_d[3] }   { LOCATION = J14; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+
+# ---- B -> A (received here) ----
+set_pin_assignment { link_bvld }   { LOCATION = G16; IOSTANDARD = LVCMOS33; PULLTYPE = PULLDOWN; }
+set_pin_assignment { link_bd[0] }  { LOCATION = M14; IOSTANDARD = LVCMOS33; PULLTYPE = PULLDOWN; }
+set_pin_assignment { link_bd[1] }  { LOCATION = L10; IOSTANDARD = LVCMOS33; PULLTYPE = PULLDOWN; }
+set_pin_assignment { link_bd[2] }  { LOCATION = D16; IOSTANDARD = LVCMOS33; PULLTYPE = PULLDOWN; }
+set_pin_assignment { link_bd[3] }  { LOCATION = F14; IOSTANDARD = LVCMOS33; PULLTYPE = PULLDOWN; }
+
+# Board USB-UART (CH340) TX: same pin the murmur_d1 images already printed on.
+set_pin_assignment { uart_tx }     { LOCATION = D12; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+# TF card (W2.2)
+set_pin_assignment { sd_sclk }      { LOCATION = A14; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment { sd_miso }      { LOCATION = B14; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP; }
+set_pin_assignment { sd_mosi }      { LOCATION = A13; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }
+set_pin_assignment { sd_ncs }       { LOCATION = A12; IOSTANDARD = LVCMOS33; DRIVESTRENGTH = 8; PULLTYPE = NONE; }

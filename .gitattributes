@@ -1,0 +1,8 @@
+# 统一按 LF 存储，Windows 下的 .ps1 仍可正常运行
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.png binary
+*.jpg binary
+*.pdf binary
+*.docx binary

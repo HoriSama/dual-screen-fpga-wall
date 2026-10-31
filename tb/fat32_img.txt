@@ -1,0 +1,9 @@
+volume: 7258 sectors, 512 B/sector, 8 sec/cluster, rsv=1, nfats=2, fat_size=8, root_cluster=2
+data_start (LBA) = 17
+files:
+  CAM1.BMP: first_cluster=3 clusters=226 size=921654
+  CAM2.BMP: first_cluster=229 clusters=226 size=921654
+  CAM3.BMP: first_cluster=455 clusters=226 size=921654
+  CAM4.BMP: first_cluster=681 clusters=226 size=921654
+expected bank words: 27648 (4 x 6912 summary only)
+expected 1:1 words : 1228800 (4 x 307200)
